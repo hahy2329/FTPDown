@@ -36,12 +36,4 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	@RequestMapping("/FTP")
-	public String mainHome() throws Exception{
-		
-		return "";
-		
-	}
-	
 }
