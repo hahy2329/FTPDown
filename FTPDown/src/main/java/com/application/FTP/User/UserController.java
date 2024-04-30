@@ -15,4 +15,12 @@ public class UserController {
 		return mv;
 	}
 	
+	@GetMapping("/login") // 유저 로그인
+	public ModelAndView login() throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/login");
+		return mv;
+	}
+	
 }

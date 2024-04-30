@@ -36,22 +36,22 @@
                             <div class="dropdown-menu m-0">
                                 <a href="feature.html" class="dropdown-item">공지사항</a>
                                 <a href="quote.html" class="dropdown-item">자유게시판</a>
+                                <a href="quote.html" class="dropdown-item">문의사항</a>
                             </div>
                         </div>
                         <a href="service.html" class="nav-item nav-link">고객지원</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">다운로드</a>
                             <div class="dropdown-menu m-0">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="quote.html" class="dropdown-item">Free Quote</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="feature.html" class="dropdown-item">문서파일</a>
+                                <a href="quote.html" class="dropdown-item">그림파일</a>
+                                <a href="team.html" class="dropdown-item">실행파일</a>
+                                <a href="testimonial.html" class="dropdown-item">기타</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="contact.html" class="nav-item nav-link"></a>
                     </div>
-                    <a href="${contextPath }/user/register" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">회원가입</a>
+                    <a href="${contextPath }/user/login" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">로그인</a>
                 </div>
             </nav>
 
