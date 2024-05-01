@@ -163,7 +163,14 @@
 		      <groupId>org.apache.tiles</groupId>
 		      <artifactId>tiles-servlet</artifactId>
 		      <version>3.0.7</version>
-	     </dependency>        
+	     </dependency>
+	     <!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.0</version>
+			<scope>provided</scope>
+		</dependency>        
 	</dependencies>
     <build>
         <plugins>

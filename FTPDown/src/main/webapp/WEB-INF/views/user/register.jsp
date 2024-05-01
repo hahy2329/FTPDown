@@ -43,11 +43,20 @@
 			$.ajax({
 				type : "get",
 				url : "${contextPath}/user/checkDuplicatedId?name=" + name,
-				success :
-				
-				
-			});
-			
+				success : function(data){
+					if(data == "notDuplicate"){
+						$(".answer").empty();
+						alert("사용할 수 있는 ID입니다.");
+						$(".answer").append("<p style='color: green;'>" + "중복체크 완료" + "</p>");
+						isValidName = true;
+					}else{
+						$(".answer").empty();
+						alert("이미 존재하는 ID입니다.");
+						$(".answer").append("<p style='color: red;'>" + "이미 존재하는 ID입니다." + "</p>")
+						isValidName = false;
+					}
+				}	
+			});		
 		});
 		
 		
