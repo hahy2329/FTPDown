@@ -44,7 +44,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">다운로드</a>
                             <div class="dropdown-menu m-0">
                                 <a href="feature.html" class="dropdown-item">문서파일</a>
-                                <a href="quote.html" class="dropdown-item">그림파일</a>
+                                <a href="" class="dropdown-item">그림파일</a>
                                 <a href="team.html" class="dropdown-item">실행파일</a>
                                 <a href="testimonial.html" class="dropdown-item">기타</a>
                             </div>
