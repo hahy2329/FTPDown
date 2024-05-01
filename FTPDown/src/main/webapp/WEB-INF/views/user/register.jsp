@@ -6,6 +6,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	
+	var isValidName = false;
+	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+	
+	$().ready(function(){
+		
+		$(document).on("click", "#btnOverlapped", function(){
+			
+			$(".answer").empty();
+			
+			var name = $("#name").val();
+			
+			if(name == ''){ //아이디 빈칸 체크
+				alert("ID를 입력해주세요.");
+				$(".answer").append("<p style='color: red;'>" + "ID를 입력해 주세요." + "</p>");
+				return;
+			}
+			if(name.length < 6 || name.length > 15){ //아이디가 6자리 이상 15자리 이하인지 체크
+				alert("6자리 이상 15자리 이하로 입력해 주세요.");
+				$(".answer").append("<p style='color: red;'>" + "6자리 이상 15자리 이하로 입력해주세요." + "</p>");
+				return;
+			}
+			if(name.search(/\s/) != -1){ //아이디 공백 체크
+				alert("공백은 허용할 수 없습니다.");
+				$(".answer").append("<p style='color: red;'>" + "공백은 허용할 수 없습니다." + "</p>");
+				return;
+			}
+			if(special_pattern.test(name) == true){
+				alert("특수문자는 허용할 수 없습니다.");
+				$(".answer").append("<p style='color: red;'>" + "특수문자는 사용할 수 없습니다." + "</p>");
+				return;
+			} //특수문자 체크
+			
+			$.ajax({
+				type : "get",
+				url : "${contextPath}/user/checkDuplicatedId?name=" + name,
+				success :
+				
+				
+			});
+			
+		});
+		
+		
+	});
+
+</script>
 </head>
 <body>
 	<!-- Contact Start -->
@@ -23,6 +71,7 @@
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required="required">
                                         <label>아이디</label> <button type="button" id="btnOverlapped" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                                        <p class="answer"></p>
                                         <br>
                                     </div>
                                     <div class="form-floating">
@@ -60,7 +109,8 @@
                                     </div>
                                     <div class="form-floating">
                                     	<input type="email" class="form-control" id="namujiAddress" name="namujiAddress" required="required">                    
-                                        <label>관리자로 가입 시, 코드번호를 입력해 주세요.</label><br>
+                                        <label>관리자로 가입 시, 코드번호를 입력해 주세요.</label> <button type="button" onclick="execDaumPostcode();" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                                    	<br>
                                     </div>
                                 </div>
                                 <div class="col-12">
