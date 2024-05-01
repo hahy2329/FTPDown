@@ -22,15 +22,41 @@
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required="required">
-                                        <label>아이디</label>
-                                    </div><br>
+                                        <label>아이디</label> <button type="button" id="btnOverlapped" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                                        <br>
+                                    </div>
                                     <div class="form-floating">
                                         <input type="password" class="form-control" id="password" name="password" required="required">
                                         <label>비밀번호</label><br>
                                     </div>
                                     <div class="form-floating">
-                                    	<input type="password" class="form-control" id="confirmPasswd" required="required">
+                                    	<input type="password" class="form-control" id="confirmPasswd" required="required">                    
                                         <label>비밀번호 재확인</label><br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="text" class="form-control" id="nickname" name="nickname" required="required">                    
+                                        <label>닉네임</label><br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="email" class="form-control" id="email" name="email" required="required">                    
+                                        <label>이메일</label><br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="text" class="form-control" id="zipcode" name="zipcode" required="required">                    
+                                        <label>우편번호</label> <button type="button" onclick="execDaumPostcode();" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                                        <br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="email" class="form-control" id="roadAddress" name="roadAddress" required="required">                    
+                                        <label>도로명 주소</label><br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="email" class="form-control" id="jibunAddress" name="jibunAddress" required="required">                    
+                                        <label>지번 주소</label><br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="email" class="form-control" id="namujiAddress" name="namujiAddress" required="required">                    
+                                        <label>나머지 주소</label><br>
                                     </div>
                                 </div>
                                 <div class="col-12">
