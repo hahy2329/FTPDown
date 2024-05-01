@@ -36,6 +36,8 @@
                                 </div>
                             </div>
                         </form>
+                       	<a href="${contextPath }/user/register" class="nav-item nav-link">회원가입</a>
+                       	<a href="index.html" class="nav-item nav-link">ID/PW찾기</a>
                     </div>
                 </div>
             </div>
