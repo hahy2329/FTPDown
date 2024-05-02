@@ -50,14 +50,14 @@ public class UserController {
 	
 	@GetMapping("/checkDuplicatedId") //회원가입 ID 중복체크
 	public ResponseEntity<String> checkDuplicatedId(@RequestParam("name") String name) throws Exception{
-		logger.info(name);
+		logger.info("ID 중복확인 : ", name);
 		
 		return new ResponseEntity<String>(userService.checkDuplicatedId(name), HttpStatus.OK);
 	}
 	
 	@GetMapping("/checkDuplicatedEmail") // 회원가입 EMAIL 중복체크
 	public ResponseEntity<String> checkDuplicatedEmail(@RequestParam("email") String email) throws Exception{
-		logger.info(email);
+		logger.info("email 중복확인 : ", email);
 		
 		return new ResponseEntity<String>(userService.checkDuplicatedEmail(email), HttpStatus.OK);
 		
@@ -65,8 +65,8 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<Object> insertRegister(UserDTO userDTO, HttpServletRequest request) throws Exception{
-		logger.info(userDTO.getName());
-		logger.info(userDTO.getNickname());
+		logger.info("ID : ",userDTO.getName());
+		logger.info("NickName : ",userDTO.getNickname());
 		
 		userService.insertRegister(userDTO);
 		
