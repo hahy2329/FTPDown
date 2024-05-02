@@ -101,6 +101,48 @@
 				}	
 			});
 		});
+		
+		$(document).on("click", "#checkRole", function(){
+			$(".answer3").empty();
+			
+			var role = $("#role").val();
+			
+			if(role == ''){
+				alert("관리자 코드를 입력해 주세요.");
+				$(".answer3").append("<p style='color: green;'>" + "관리자 코드를 입력해 주세요." + "</p>");
+				return;
+			}
+			if(role.length > 6){ //아이디가 6자리 이상 15자리 이하인지 체크
+				alert("코드가 올바르지 않습니다.");
+				$(".answer3").append("<p style='color: red;'>" + "코드가 올바르지 않습니다." + "</p>");
+				return;
+			}
+			if(role.search(/\s/) != -1){ //아이디 공백 체크
+				alert("공백은 허용할 수 없습니다.");
+				$(".answer3").append("<p style='color: red;'>" + "공백은 허용할 수 없습니다." + "</p>");
+				return;
+			}
+		});
+		
+		$.ajax({
+			type : "get",
+			url : "${contextPath}/admin/checkDuplicatedRole?role=" + role,
+			success : function(data){
+				if(data == "notDuplicate"){
+					$(".answer2").empty();
+					alert("사용할 수 있는 Email입니다.");
+					$(".answer2").append("<p style='color: green;'>" + "중복체크 완료" + "</p>");
+					isValidEmail = true;
+				}else{
+					$(".answer2").empty();
+					alert("이미 등록된 Email입니다.");
+					$(".answer2").append("<p style='color: red;'>" + "이미 존재하는 이메일입니다." + "</p>")
+					isValidEmail = false;
+				}
+			}	
+		});
+		
+		
 	});
 
 </script>
@@ -157,6 +199,12 @@
                                     <div class="form-floating">
                                     	<input type="text" class="form-control" id="namujiAddress" name="namujiAddress" required="required">                    
                                         <label>나머지 주소</label><br>
+                                    </div>
+                                    <div class="form-floating">
+                                    	<input type="text" class="form-control" id="role" name="role" required="required"> <button type="button" id="checkRole" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>                    
+                                        <label>코드번호</label><br>
+                                        <p class="answer3"></p>
+                                    	<br>
                                     </div>
                                 </div>
                                 <div class="col-12">
