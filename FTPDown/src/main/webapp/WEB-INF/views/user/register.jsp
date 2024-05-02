@@ -11,9 +11,11 @@
 	var isValidName = false;
 	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
 	
+	var isValidEmail = false;
+	
 	$().ready(function(){
 		
-		$(document).on("click", "#btnOverlapped", function(){
+		$(document).on("click", "#btnOverlappedId", function(){
 			
 			$(".answer").empty();
 			
@@ -59,6 +61,43 @@
 			});		
 		});
 		
+		$(document).on("click", "btnOverlappedEmail", function(){
+			$(".answer2").empty();
+			
+			var email = $("#email").val();
+			
+			if(email == ''){
+				alert("이메일을 입력해 주세요.");
+				$(".answer2").append("<p style='color: red;'>" + "ID를 입력해 주세요." + "</p>");
+				return;
+			}
+			if(email.search(/\s/) != -1){ //아이디 공백 체크
+				alert("공백은 허용할 수 없습니다.");
+				$(".answer2").append("<p style='color: red;'>" + "공백은 허용할 수 없습니다." + "</p>");
+				return;
+			}
+			
+			$.ajax({
+				type : "get",
+				url : "${contextPath}/user/checkDuplicatedEmail?email=" + email,
+				success : function(data){
+					if(data == "notDuplicate"){
+						$(".answer2").empty();
+						alert("사용할 수 있는 Email입니다.");
+						$(".answer2").append("<p style='color: green;'>" + "중복체크 완료" + "</p>");
+						isValidEmail = true;
+					}else{
+						$(".answer2").empty();
+						alert("이미 등록된 Email입니다.");
+						$(".answer2").append("<p style='color: red;'>" + "이미 존재하는 ID입니다." + "</p>")
+						isValidEmail = false;
+					}
+				}	
+			});
+			
+			
+		});
+		
 		
 	});
 
@@ -79,7 +118,7 @@
                                 <div class="col-md-8">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required="required">
-                                        <label>아이디</label> <button type="button" id="btnOverlapped" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                                        <label>아이디</label> <button type="button" id="btnOverlappedId" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
                                         <p class="answer"></p>
                                         <br>
                                     </div>
@@ -96,8 +135,9 @@
                                         <label>닉네임</label><br>
                                     </div>
                                     <div class="form-floating">
-                                    	<input type="email" class="form-control" id="email" name="email" required="required">                    
+                                    	<input type="email" class="form-control" id="email" name="email" required="required"> <button type="button" id="btnOverlappedEmail" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>                    
                                         <label>이메일</label><br>
+                                        <p class="answer2"></p>
                                     </div>
                                     <div class="form-floating">
                                     	<input type="text" class="form-control" id="zipcode" name="zipcode" required="required">                    

@@ -42,6 +42,7 @@ public class UserController {
 	
 	@GetMapping("/checkDuplicatedId")
 	public ResponseEntity<String> checkDuplicatedId(@RequestParam("name") String name) throws Exception{
+		logger.info(name);
 		
 		return new ResponseEntity<String>(userService.checkDuplicatedId(name), HttpStatus.OK);
 	}
