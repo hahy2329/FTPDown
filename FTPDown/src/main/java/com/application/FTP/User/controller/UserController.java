@@ -40,11 +40,19 @@ public class UserController {
 		return mv;
 	}
 	
-	@GetMapping("/checkDuplicatedId")
+	@GetMapping("/checkDuplicatedId") //회원가입 ID 중복체크
 	public ResponseEntity<String> checkDuplicatedId(@RequestParam("name") String name) throws Exception{
 		logger.info(name);
 		
 		return new ResponseEntity<String>(userService.checkDuplicatedId(name), HttpStatus.OK);
+	}
+	
+	@GetMapping("/checkDuplicatedEmail") // 회원가입 EMAIL 중복체크
+	public ResponseEntity<String> checkDuplicatedEmail(@RequestParam("email") String email) throws Exception{
+		logger.info(email);
+		
+		return new ResponseEntity<String>(userService.checkDuplicatedEmail(email), HttpStatus.OK);
+		
 	}
 	
 }

@@ -61,16 +61,22 @@
 			});		
 		});
 		
-		$(document).on("click", "btnOverlappedEmail", function(){
+		$(document).on("click", "#btnOverlappedEmail", function(){
 			$(".answer2").empty();
 			
 			var email = $("#email").val();
 			
 			if(email == ''){
 				alert("이메일을 입력해 주세요.");
-				$(".answer2").append("<p style='color: red;'>" + "ID를 입력해 주세요." + "</p>");
+				$(".answer2").append("<p style='color: red;'>" + "이메일을 입력해 주세요." + "</p>");
 				return;
 			}
+			if(email.length > 30){ //아이디가 6자리 이상 15자리 이하인지 체크
+				alert("30자리 이하로 입력해 주세요.");
+				$(".answer2").append("<p style='color: red;'>" + "30자리 이하로 입력해 주세요." + "</p>");
+				return;
+			}
+			
 			if(email.search(/\s/) != -1){ //아이디 공백 체크
 				alert("공백은 허용할 수 없습니다.");
 				$(".answer2").append("<p style='color: red;'>" + "공백은 허용할 수 없습니다." + "</p>");
@@ -89,13 +95,11 @@
 					}else{
 						$(".answer2").empty();
 						alert("이미 등록된 Email입니다.");
-						$(".answer2").append("<p style='color: red;'>" + "이미 존재하는 ID입니다." + "</p>")
+						$(".answer2").append("<p style='color: red;'>" + "이미 존재하는 이메일입니다." + "</p>")
 						isValidEmail = false;
 					}
 				}	
 			});
-			
-			
 		});
 		
 		
