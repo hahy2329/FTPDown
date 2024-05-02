@@ -38,6 +38,6 @@
 	
 	<context:component-scan base-package="com.application.FTP" />
 	
-	
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
 </beans:beans>

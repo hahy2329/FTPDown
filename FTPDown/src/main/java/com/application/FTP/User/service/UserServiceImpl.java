@@ -1,15 +1,20 @@
 package com.application.FTP.User.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.application.FTP.User.dao.UserDAO;
+import com.application.FTP.User.dto.UserDTO;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
-	@Autowired
-	private UserDAO userDAO;
+	
+	private final BCryptPasswordEncoder bcryptPasswordEncoder;
+	private final UserDAO userDAO;
 	
 	@Override
 	public String checkDuplicatedId(String name) throws Exception {
@@ -29,6 +34,13 @@ public class UserServiceImpl implements UserService {
 		}else {
 			return "Duplicate";
 		}
+	}
+
+	@Override
+	public void insertRegister(UserDTO userDTO) throws Exception {
+		userDTO.setPassword(bcryptPasswordEncoder.encode(userDTO.getPassword()));
+		
+		userDAO.insertRegister(userDTO);
 	}
 
 }

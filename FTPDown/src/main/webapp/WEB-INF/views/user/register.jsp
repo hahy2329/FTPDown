@@ -8,10 +8,14 @@
 <title>Insert title here</title>
 <script>
 	
-	var isValidName = false;
+	var isValidName = false; //ID관련 체크
 	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
 	
-	var isValidEmail = false;
+	var isValidEmail = false; //이메일관련 체크
+	
+	var pattern1 = /[0-9]/;
+    var pattern2 = /[a-zA-Z]/;
+    var pattern3 = /[~!@\#$%<>^&*]/;
 	
 	$().ready(function(){
 		
@@ -89,17 +93,45 @@
 				success : function(data){
 					if(data == "notDuplicate"){
 						$(".answer2").empty();
-						alert("사용할 수 있는 Email입니다.");
+						alert("사용할 수 있는 이메일입니다.");
 						$(".answer2").append("<p style='color: green;'>" + "중복체크 완료" + "</p>");
 						isValidEmail = true;
 					}else{
 						$(".answer2").empty();
-						alert("이미 등록된 Email입니다.");
+						alert("이미 등록된 이메일입니다.");
 						$(".answer2").append("<p style='color: red;'>" + "이미 존재하는 이메일입니다." + "</p>")
 						isValidEmail = false;
 					}
 				}	
 			});
+		});
+		
+		$("form").submit(function(){
+			if(isValidId == false){
+				alert("ID를 확인해 주세요.");
+				return false;
+			}
+			if(isValidEmail == false){
+				alert("이메일을 확인해 주세요.");
+				return false;
+			}
+			if($("#password").val()==''){
+				alert("패스워드를 입력해 주세요.");
+				return false;
+			}
+			if(isValidId == true && isValidEmail == true){
+				if($("#password").val() == $("#confirmPasswd").val()){
+					if(!pattern1.test($("#password").val())||!pattern2.test($("#password").val())||!pattern3.test($("#password").val())||$("#password").val().length<8||$("#password").val().length>50){
+						alert("영문+숫자+특수기호를 혼합한 8자리 이상으로 구성하여야 합니다.");
+						return false;
+					}else{
+						return true;
+					}					
+				}else{
+					alert("패스워드를 다시 확인해 주세요.");
+					return false;
+				}
+			}
 		});
 	});
 
@@ -111,11 +143,11 @@
             <div class="container">
                 <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">FTPDown</div>
-                    <h2 class="mb-5">회원가입</h2>
+                    <h2 class="mb-5">유저 회원가입</h2>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
-                        <form>
+                        <form action="${contextPath }/user/register" method="post">
                             <div class="row g-3">
                                 <div class="col-md-8">
                                     <div class="form-floating">
