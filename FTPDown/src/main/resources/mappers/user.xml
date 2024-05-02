@@ -21,7 +21,7 @@
 	</select>
 	
 	<insert id="insertRegister" parameterType="UserDTO">
-		INSERT INTO USER(NAME, NICKNAME, PASSWORD, EMAIL, ZIPCODE, ROAD_ADDRESS, JIBUN_ADDRESS, NAMUJI_ADDRESS)
+		INSERT INTO USER(NAME, NICKNAME, PASSWORD, EMAIL, ZIPCODE, ROAD_ADDRESS, JIBUN_ADDRESS, NAMUJI_ADDRESS, ROLE)
 		VALUES(
 			#{name},
 			#{nickname},
@@ -30,8 +30,18 @@
 			#{zipcode},
 			#{roadAddress},
 			#{jibunAddress},
-			#{namujiAddress}
+			#{namujiAddress},
+			#{role}
 		)
 	
 	</insert>
+	
+	<select id="loginCheckId" parameterType="String" resultType="UserDTO">
+		SELECT
+			*
+		FROM
+			USER
+		WHERE
+			NAME = #{name}
+	</select>
 </mapper>

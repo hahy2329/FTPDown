@@ -17,7 +17,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
-                        <form>
+                        <form action="${contextPath }/login.do" method="post">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">

@@ -27,6 +27,11 @@ public class UserDAOImpl implements UserDAO {
 		sqlSession.insert("user.insertRegister", userDTO);
 		
 	}
+
+	@Override
+	public UserDTO loginCheckId(String name) throws Exception {
+		return sqlSession.selectOne("user.loginCheckId", name);
+	}
 	
 	
 }

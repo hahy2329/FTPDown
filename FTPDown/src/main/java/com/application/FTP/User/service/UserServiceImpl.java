@@ -39,8 +39,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void insertRegister(UserDTO userDTO) throws Exception {
 		userDTO.setPassword(bcryptPasswordEncoder.encode(userDTO.getPassword()));
+		userDTO.setRole("ROLE_USER");
 		
 		userDAO.insertRegister(userDTO);
+	}
+
+	@Override
+	public UserDTO loginCheckId(String name) throws Exception {
+		return userDAO.loginCheckId(name);
+	}
+
+	@Override
+	public boolean checkPassword(String name, String password) throws Exception {
+		boolean check = false;
+		UserDTO user = userDAO.loginCheckId(name);
+		
+		if(bcryptPasswordEncoder.matches(password, user.getPassword())) {
+			check = true;
+			
+			return check;
+			
+		}else {
+			
+			return check;
+		}
 	}
 
 }

@@ -25,17 +25,17 @@
              login-page="/user/login"               
              username-parameter="name"
              password-parameter="password"
-             login-processing-url="/user/login.do"
+             login-processing-url="/login.do"
              default-target-url="/"
              authentication-failure-url="/user/login"
              always-use-default-target="true"
              
-             
              />
-             
              
              </http>
              
-             
-             
+             <authentication-manager>
+             	<authentication-provider ref="userAuthenticationProvider"/>
+             </authentication-manager>
+             <beans:bean id="userAuthenticationProvider" class="com.application.FTP.User.service.UserAuthenticationProvider"/>
 </beans:beans>             
