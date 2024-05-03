@@ -18,12 +18,13 @@ import com.application.FTP.User.dto.UserDTO;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class UserAuthenticationProvider implements AuthenticationProvider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserAuthenticationProvider.class);
 	
-	private final UserService userService;
+	@Autowired
+	private UserService userService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

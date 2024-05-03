@@ -50,15 +50,15 @@
 				type : "get",
 				url : "${contextPath}/user/checkDuplicatedId?name=" + name,
 				success : function(data){
-					if(data == "notDuplicate"){
+					if(data == "Duplicate"){
 						$(".answer").empty();
-						alert("사용할 수 있는 ID입니다.");
-						$(".answer").append("<p style='color: green;'>" + "중복체크 완료" + "</p>");
+						alert("사용할 수 없는 ID입니다.");
+						$(".answer").append("<p style='color: red;'>" + "이미 존재하는 ID입니다." + "</p>");
 						isValidName = true;
 					}else{
 						$(".answer").empty();
-						alert("이미 존재하는 ID입니다.");
-						$(".answer").append("<p style='color: red;'>" + "이미 존재하는 ID입니다." + "</p>")
+						alert("사용 가능한 ID입니다.");
+						$(".answer").append("<p style='color: green;'>" + "사용 가능한 ID입니다." + "</p>")
 						isValidName = false;
 					}
 				}	

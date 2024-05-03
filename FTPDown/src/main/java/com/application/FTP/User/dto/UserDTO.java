@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDTO implements UserDetails{
 	
+	
+	
 	private String name;
 	private String nickname;
 	private String password;

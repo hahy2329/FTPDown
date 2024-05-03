@@ -14,7 +14,7 @@
              <http auto-config="true" use-expressions="true">
              <csrf disabled="true"/>
              
-             <intercept-url pattern="/" access="permitAll"/>
+             <intercept-url pattern="/**/jquery-3.4.1.min.js" access="permitAll"/>
              <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
              
              <!-- login-page : 로그인 페이지, username-parameter : 로그인 시 아이디 데이터를 담을 변수, password_parameter : 로그인 시 패스워드 데이터를 담을 변수
@@ -26,7 +26,7 @@
              username-parameter="name"
              password-parameter="password"
              login-processing-url="/login.do"
-             default-target-url="/"
+             default-target-url="/user/loginSuccess"
              authentication-failure-url="/user/login"
              always-use-default-target="true"
              
