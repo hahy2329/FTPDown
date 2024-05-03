@@ -52,14 +52,14 @@ public class UserController {
 	
 	@GetMapping("/checkDuplicatedId") //회원가입 ID 중복체크
 	public ResponseEntity<String> checkDuplicatedId(@RequestParam("name") String name) throws Exception{
-		logger.info("ID 중복확인 : ", name);
-		System.out.println("ID 중복확인 : " + name);
+		logger.info("ID 중복확인 : " + name);
+		
 		return new ResponseEntity<String>(userService.checkDuplicatedId(name), HttpStatus.OK);
 	}
 	
 	@GetMapping("/checkDuplicatedEmail") // 회원가입 EMAIL 중복체크
 	public ResponseEntity<String> checkDuplicatedEmail(@RequestParam("email") String email) throws Exception{
-		logger.info("email 중복확인 : ", email);
+		logger.info("email 중복확인 : " + email);
 		
 		return new ResponseEntity<String>(userService.checkDuplicatedEmail(email), HttpStatus.OK);
 		

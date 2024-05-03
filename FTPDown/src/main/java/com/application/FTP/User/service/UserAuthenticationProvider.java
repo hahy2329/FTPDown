@@ -12,24 +12,28 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.application.FTP.User.dto.UserDTO;
 
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+@Service
 @NoArgsConstructor
 public class UserAuthenticationProvider implements AuthenticationProvider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserAuthenticationProvider.class);
 	
 	@Autowired
-	private UserService userService;
+	UserService userService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String name = (String)authentication.getPrincipal();
 		String password = (String)authentication.getCredentials();
+		
 		
 		if(name.equals("")) {
 			return null;
@@ -40,11 +44,13 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		
 		
 		UsernamePasswordAuthenticationToken result = null;
+		UserDTO user = null;
+		
 		
 		try {
 			if(userService.loginCheckId(name) != null) {
 				if(userService.checkPassword(name, password) == true) {
-					UserDTO user = userService.loginCheckId(name);
+					user = userService.loginCheckId(name);
 					List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 					roles.add(new SimpleGrantedAuthority(user.getRole()));
 					result = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), roles);

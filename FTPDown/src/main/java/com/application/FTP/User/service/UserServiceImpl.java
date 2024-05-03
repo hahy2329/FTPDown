@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.application.FTP.User.dao.UserDAO;
 import com.application.FTP.User.dto.UserDTO;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service
