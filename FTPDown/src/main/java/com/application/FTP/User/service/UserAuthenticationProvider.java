@@ -20,14 +20,14 @@ import com.application.FTP.User.dto.UserDTO;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-@Service
-@NoArgsConstructor
+
+@Component("userAuthenticationProvider")
 public class UserAuthenticationProvider implements AuthenticationProvider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserAuthenticationProvider.class);
 	
 	@Autowired
-	UserService userService;
+	private CustomUserDetailsService customUserDetailsService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -48,9 +48,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		
 		
 		try {
-			if(userService.loginCheckId(name) != null) {
-				if(userService.checkPassword(name, password) == true) {
-					user = userService.loginCheckId(name);
+			if(customUserDetailsService.loadUserByUsername(name) != null) {
+				if(customUserDetailsService.checkPassword(name, password) == true) {
+					user = (UserDTO)customUserDetailsService.loadUserByUsername(name);
 					List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 					roles.add(new SimpleGrantedAuthority(user.getRole()));
 					result = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), roles);
@@ -73,7 +73,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		// TODO Auto-generated method stub
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 	}
 

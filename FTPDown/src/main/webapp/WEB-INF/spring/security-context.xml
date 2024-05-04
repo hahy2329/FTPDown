@@ -29,12 +29,14 @@
              password-parameter="password"
              login-processing-url="/login.do"
              default-target-url="/user/loginSuccess"
-             authentication-failure-url="/user/login"
+             authentication-failure-url="/user/register"
              always-use-default-target="true"
              
              />
              
              </http>
+             
+             <beans:bean id="userService" class="com.application.FTP.User.service.CustomUserDetailsService"></beans:bean>
              
              <authentication-manager>
              	<authentication-provider ref="userAuthenticationProvider"/>
