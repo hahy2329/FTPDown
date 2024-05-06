@@ -31,15 +31,15 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String name = (String)authentication.getPrincipal();
+		String username = (String)authentication.getPrincipal();
 		String password = (String)authentication.getCredentials();
 		
 		
-		if(name.equals("")) {
+		if(username.equals("")) {
 			return null;
 		}
 		
-		logger.info("ID : " + name);
+		logger.info("ID : " + username);
 		logger.info("Password : " + password);
 		
 		
@@ -48,9 +48,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		
 		
 		try {
-			if(customUserDetailsService.loadUserByUsername(name) != null) {
-				if(customUserDetailsService.checkPassword(name, password) == true) {
-					user = (UserDTO)customUserDetailsService.loadUserByUsername(name);
+			if(customUserDetailsService.loadUserByUsername(username) != null) {
+				if(customUserDetailsService.checkPassword(username, password) == true) {
+					user = (UserDTO)customUserDetailsService.loadUserByUsername(username);
 					List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 					roles.add(new SimpleGrantedAuthority(user.getRole()));
 					result = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), roles);

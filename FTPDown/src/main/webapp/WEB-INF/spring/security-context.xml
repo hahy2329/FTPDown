@@ -25,7 +25,7 @@
              
              <form-login
              login-page="/user/login"               
-             username-parameter="name"
+             username-parameter="username"
              password-parameter="password"
              login-processing-url="/login.do"
              default-target-url="/user/loginSuccess"

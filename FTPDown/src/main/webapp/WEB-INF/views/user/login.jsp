@@ -21,7 +21,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name">
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Your Name">
                                         <label for="name">Your ID</label>
                                     </div>
                                 </div>
