@@ -24,6 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		
 		UserDTO user = null;
 		
 		try {
@@ -32,7 +33,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return user;
 		
 	}

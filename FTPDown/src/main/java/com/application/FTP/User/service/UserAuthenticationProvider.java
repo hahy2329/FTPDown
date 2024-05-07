@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @Component("userAuthenticationProvider")
+@SuppressWarnings("unchecked")
 public class UserAuthenticationProvider implements AuthenticationProvider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserAuthenticationProvider.class);
@@ -44,20 +46,13 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		
 		
 		UsernamePasswordAuthenticationToken result = null;
-		UserDTO user = null;
+		UserDTO user1 = (UserDTO)customUserDetailsService.loadUserByUsername(username);
 		
 		
 		try {
-			if(customUserDetailsService.loadUserByUsername(username) != null) {
-				if(customUserDetailsService.checkPassword(username, password) == true) {
-					user = (UserDTO)customUserDetailsService.loadUserByUsername(username);
-					List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-					roles.add(new SimpleGrantedAuthority(user.getRole()));
-					result = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), roles);
-					result.setDetails(user);
-				}else {
-					return null;
-					
+			if(user1 != null) {
+				if(!customUserDetailsService.checkPassword(username, password)) {
+					throw new BadCredentialsException(username);
 				}
 			}else {
 				return null;
@@ -68,7 +63,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 			e.printStackTrace();
 		}
 	
-		return result;
+		return new UsernamePasswordAuthenticationToken(username, password, user1.getAuthorities());
 	}
 
 	@Override
