@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		
-		UserDTO user = null;
+		UserDetails user = null;
 		
 		try {
 			user = userDAO.loginCheckId(username);
