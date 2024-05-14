@@ -63,7 +63,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").permitAll() // 전체 접근 허용
 				.antMatchers("/login").anonymous() // 인증되지 않은 사용자만 접근 허용
 				.antMatchers("/register").anonymous() // 인증되지 않은 사용자만 접근 허용
-				.
+				
+				//그 외 항목 전부 인증 적용
+				.anyRequest()
+				.authenticated()
+				.and()
+				
+				.formLogin() // 로그인하는 경우에 대해 설정
+					
+				
+				
+				//exception 처리
+				.exceptionHandling()
+					.accessDeniedHandler(webAccessDeniedHandler) // 권한이 없는 사용자 접근 시
+					.authenticationEntryPoint(webAuthenticationEntryPoint) // 인증되지 않은 사용자 접근 시
+				
+				
 	}
 	
 }
