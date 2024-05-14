@@ -70,8 +70,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				
 				.formLogin() // 로그인하는 경우에 대해 설정
-					
+					.loginPage("/user/login") // 로그인 페이지 URL을 설정
+					.successForwardUrl("/") // 로그인 성공 후 이동할 URL 설정
+					.failureForwardUrl("/user/login") // 로그인 실패 URL 설정
+					.usernameParameter("username") // 로그인 시 ID 파라미터 값
+					.passwordParameter("password") // 로그인 시 Password 파라미터 값
+					.permitAll()
+					.and()
 				
+				.logout() // 로그아웃 관련 URL 설정
+					.logoutUrl("/user/logout") // 로그아웃 URL 설정
+					.logoutSuccessUrl("/") // 로그아웃  성공 시 이동할 URL 설정
+					.invalidateHttpSession(true) // 로그아웃 후 세션 초기화 설정
+					.deleteCookies("JSESSIONID") // 로그아웃 후 쿠키 삭제 설정
+					.and()
 				
 				//exception 처리
 				.exceptionHandling()
