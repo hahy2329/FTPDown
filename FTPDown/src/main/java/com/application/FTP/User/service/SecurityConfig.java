@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,6 +34,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) {
 		authenticationManagerBuilder.authenticationProvider(customAuthenticationProvider());
+	}
+	
+	/*
+	 * 스프링 시큐리티 룰을 무시할 URL 규칙 설정
+	 * 정적 자원에 대해서는 security 설정을 적용하지 않음
+	 * */
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception{
+		
+		web.ignoring()
+			.antMatchers("/resources/**")
+			.antMatchers("/css/**")
+			.antMatchers("/vendor/**")
+			.antMatchers("/jquery-3.4.1.min.js")
+			.antMatchers("/favicon/**")
+			.antMatchers("/img/**");
+	}
+	
+	// 스프링 시큐리티 규칙
+	@Override
+	protected void configure(HttpSecurity http) throws Exception{
+		
+		
+		
 	}
 	
 }
