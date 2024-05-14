@@ -56,9 +56,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 스프링 시큐리티 규칙
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		
-		
-		
+		http.csrf().disable() //csrf 보안 설정 비활성화
+				.antMatcher("/**").authorizeRequests() // 보호된 리소스 URI에 접근할 수 있는 권한 설정
+				
+				
+				.antMatchers("/").permitAll() // 전체 접근 허용
+				.antMatchers("/login").anonymous() // 인증되지 않은 사용자만 접근 허용
+				.antMatchers("/register").anonymous() // 인증되지 않은 사용자만 접근 허용
+				.
 	}
 	
 }
