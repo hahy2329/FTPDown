@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity //SpringSecurityFilterChain 포함
@@ -85,12 +86,48 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.deleteCookies("JSESSIONID") // 로그아웃 후 쿠키 삭제 설정
 					.and()
 				
+					
 				//exception 처리
 				.exceptionHandling()
 					.accessDeniedHandler(webAccessDeniedHandler) // 권한이 없는 사용자 접근 시
 					.authenticationEntryPoint(webAuthenticationEntryPoint) // 인증되지 않은 사용자 접근 시
 				
+				// 사용자 인증 필터 적용
+				.addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 				
+	}
+	
+	
+	/*
+	 * customLoginSuccessHandler를 CustomAuthenticationFilter의 인증 성공 핸들러로 추가
+	 * 로그인 성공 시 /user/login 로그인 url을 체크하고 인증 토큰 발급
+	 * */
+	
+	@Bean
+	public UsrCustomAuthenticationFilter usrCustomAuthenticationFilter() throws Exception{
+		UsrCustomAuthenticationFilter customAuthenticationFilter = new UsrCustomAuthenticationFilter(authenticationManager());
+		customAuthenticationFilter.setFilterProcessesUrl("/user/login");
+		customAuthenticationFilter.setAuthenticationSuccessHandler(usrCustomLoginSuccessHandler());
+		customAuthenticationFilter.setAuthenticationFailureHandler(usrCustomLoginFailHandler());
+		customAuthenticationFilter.afterPropertiesSet();
+		return customAuthenticationFilter;
+
+		
+	}
+	
+	
+	// 로그인 성공 시 실행 될 handler bean 등록
+	@Bean
+	public UsrCustomLoginSuccessHandler usrCustomLoginSuccessHandler() {
+		
+		return new UsrCustomLoginSuccessHandler();
+	}
+	
+	// 로그인 실패 시 실행 될 handler bean 등록
+	@Bean
+	public UsrCustomLoginFailHandler usrCustomLoginFailHandler() {
+		
+		return new UsrCustomLoginFailHandler();
 	}
 	
 }
