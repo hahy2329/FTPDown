@@ -1,5 +1,7 @@
 package com.application.FTP.User.service;
 
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity //SpringSecurityFilterChain 포함
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	private static final Filter CustomAuthenticationProvider = null;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화 로직
@@ -70,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticated()
 				.and()
 				
+			
 				.formLogin() // 로그인하는 경우에 대해 설정
 					.loginPage("/user/login") // 로그인 페이지 URL을 설정
 					.successForwardUrl("/") // 로그인 성공 후 이동할 URL 설정
@@ -86,14 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.deleteCookies("JSESSIONID") // 로그아웃 후 쿠키 삭제 설정
 					.and()
 				
+				//사용자 인증 필터 적용
+				.addFilterBefore(CustomAuthenticationProvider, UsernamePasswordAuthenticationFilter.class);
 					
-				//exception 처리
-				.exceptionHandling()
-					.accessDeniedHandler(webAccessDeniedHandler) // 권한이 없는 사용자 접근 시
-					.authenticationEntryPoint(webAuthenticationEntryPoint) // 인증되지 않은 사용자 접근 시
 				
-				// 사용자 인증 필터 적용
-				.addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 				
 	}
 	
@@ -125,9 +126,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	// 로그인 실패 시 실행 될 handler bean 등록
 	@Bean
-	public UsrCustomLoginFailHandler usrCustomLoginFailHandler() {
+	public UserCustomLoginFailHandler usrCustomLoginFailHandler() {
 		
-		return new UsrCustomLoginFailHandler();
+		return new UserCustomLoginFailHandler();
 	}
 	
 }
