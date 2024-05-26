@@ -171,6 +171,7 @@
 			<version>1.18.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Spring Security 사용을 위한 dependency 등록 start -->
 		<dependency>
 		  <groupId>org.springframework.security</groupId>
 		  <artifactId>spring-security-web</artifactId>
@@ -194,8 +195,6 @@
 		  <artifactId>spring-security-taglibs</artifactId>
 		  <version>${org.springframework-version}</version>
 		</dependency>
-		
-		      
 	</dependencies>
     <build>
         <plugins>
