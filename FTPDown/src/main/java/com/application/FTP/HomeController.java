@@ -43,4 +43,15 @@ public class HomeController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/login/loginPage.do")
+	public String loginPage() {
+		return "/login/loginPage";
+	}
+	
+	@RequestMapping(value = "/fail/accessDenied.do")
+	public String accessDeniedPage() throws Exception{
+		
+		return "/fail/accessDenied";
+	}
+	
 }
