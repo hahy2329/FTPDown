@@ -24,6 +24,12 @@
 	</security:http>
 	
 	<security:authentication-manager>
+		<security:authentication-provider ref="customAuthenticationProvider"/>
+	</security:authentication-manager>
+	
+	<bean id="customAuthenticationProvider" class="com.application.FTP.blackjack.CustomAuthenticationProvider"></bean>
+	
+	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
 				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/>
