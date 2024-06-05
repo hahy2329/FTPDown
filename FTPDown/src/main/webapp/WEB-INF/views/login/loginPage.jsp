@@ -62,7 +62,7 @@ body {
 </style>
 </head>
 <body>
-<form class="form-signin" action="${contextPath }/login.do" method="POST">
+<form class="form-signin" action="${contextPath }/login.do" method="post">
 	<img src="${contextPath }/resources/img/spring.png" style="width: 200px; height: 95px">
 	<h1 class="h3 mb-3 font-weight-normal"></h1>
 	<input type="text" name="userid" class="form-control" placeholder="ID" required autofocus>
