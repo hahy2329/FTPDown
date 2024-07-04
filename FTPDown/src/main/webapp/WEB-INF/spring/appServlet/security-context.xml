@@ -9,6 +9,9 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/resources/**" access="permitAll"/>
 		<intercept-url pattern="/" access="permitAll"/>
+		<intercept-url pattern="/login/loginForm.do" access="permitAll"/>
+		
+		
 		
 		<form-login login-page="/user/loginForm.do"
 					default-target-url="/"
