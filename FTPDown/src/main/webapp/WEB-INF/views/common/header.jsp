@@ -53,7 +53,7 @@
                         <a href="contact.html" class="nav-item nav-link"></a>
                     </div>
                     <sec:authorize access="isAnonymous()">
-                    	<a href="${contextPath }/user/login" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">로그인</a>
+                    	<a href="${contextPath }/user/loginForm.do" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">로그인</a>
                 	</sec:authorize>
                 	
                 	<sec:authorize access="isAuthenticated()">
