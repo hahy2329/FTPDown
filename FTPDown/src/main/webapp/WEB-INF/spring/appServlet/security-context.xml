@@ -27,7 +27,7 @@
 				data-source-ref="dataSource"
 				role-prefix=""
 				users-by-username-query="SELECT USER_ID USER_PASSWORD, ENABLED FROM USER WHERE USER_ID = ?"
-				authorities-by-username-query="SELECT USER_ID, AUTHORITY FROM AUTHORITIES WHERR USER_ID = ?"				
+				authorities-by-username-query="SELECT USER_ID, AUTHORITY FROM AUTHORITIES WHERE USER_ID = ?"				
 				group-authorities-by-username-query="SELECT g.GROUP_ID, g.GROUP_NAME, ga.AUTHORITY 
 													FROM GROUP_TABLE g, GROUP_USER gm, GROUP_AUTHORITIES ga 
 													WHERE gm.USER_ID = ? and g.GROUP_ID = ga.GROUP_ID and g.GROUP_ID = gm.GROUP_ID"
