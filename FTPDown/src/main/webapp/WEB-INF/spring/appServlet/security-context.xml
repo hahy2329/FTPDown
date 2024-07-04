@@ -20,13 +20,17 @@
 		<access-denied-handler error-page="/login/accessDenied.do"/>			
 	</http>
 	
-	<!-- Spring Security 인증 Provider -->
+	<!-- 회원 인증 Provider -->
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service 
 				data-source-ref="dataSource"
 				role-prefix=""
-				users-by-username-query="SELECT USER_ID USER_PASSWORD, ENABLED FROM USER WHERE USER_ID = ?"				
+				users-by-username-query="SELECT USER_ID USER_PASSWORD, ENABLED FROM USER WHERE USER_ID = ?"
+				authorities-by-username-query="SELECT USER_ID, AUTHORITY FROM AUTHORITIES WHERR USER_ID = ?"				
+				group-authorities-by-username-query="SELECT g.GROUP_ID, g.GROUP_NAME, ga.AUTHORITY 
+													FROM GROUP_TABLE g, GROUP_USER gm, GROUP_AUTHORITIES ga 
+													WHERE gm.USER_ID = ? and g.GROUP_ID = ga.GROUP_ID and g.GROUP_ID = gm.GROUP_ID"
 			/>
 		</authentication-provider>
 	</authentication-manager>
