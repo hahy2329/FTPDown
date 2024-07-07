@@ -9,4 +9,13 @@
 		WHERE
 			USER_ID = #{userId} 
 	</select>
+	
+	<select id="checkDuplicatedEmail" parameterType="String" resultType="String">
+		SELECT
+			USER_EMAIL
+		FROM
+			USER
+		WHERE
+			USER_EMAIL = #{userEmail}
+	</select>
 </mapper>

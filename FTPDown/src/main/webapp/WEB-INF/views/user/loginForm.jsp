@@ -11,8 +11,14 @@
 	var isValid = false;
 	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
 	
+	var isValidEmail = false;
+	
+	var pattern1 = /[0-9]/;
+    var pattern2 = /[a-zA-Z]/;
+    var pattern3 = /[~!@\#$%<>^&*]/;
+	
 	$().ready(function(){
-		$("#userId").keyup(function(){
+		$("#btnOverlapped").click(function(){
 			
 			$(".answer").empty();
 			
@@ -58,6 +64,36 @@
 				}
 			});
 		});
+		$("#btnOverlappedEmail").click(function(){
+			
+			$(".answer1").empty();
+			
+			var userEmail = $("#userEmail").val();
+			
+			if(userEmail == ''){
+				alert("이메일을 입력해 주세요.");
+				$(".answer1").append("<p style='color:red;'>" + "이메일을 입력해 주세요." + "</p>");
+				return;
+			}
+			
+			$.ajax({
+				
+				type : "get",
+				url : "${contextPath}/user/checkDuplicatedEmail?userEmail=" + userEmail,
+				success : function(data){
+					if(data == "NotDuplicate"){
+						alert("사용할 수 있는 Email입니다.");
+						$(".answer1").append("<p style='color:green;'>" + "사용할 수 있는 Email입니다." + "</p>");
+						isValidEmail = true;
+					}else{
+						alert("사용할 수 없는 Email입니다.");
+						$(".answer1").append("<p style='color:red;'>" + "사용할 수 없는 Email입니다." + "</p>");
+						isValidEmail = false;
+					}
+				}		
+				
+			});
+		});		
 		
 	});
 	
@@ -80,18 +116,57 @@
                             <div class="row g-3">
                                 <div class="col-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" name="userId" id="userId" placeholder="Your Name">
-                                        <label for="userId">Your ID</label>
+                                        <input type="text" class="form-control" name="userId" id="userId" placeholder="아이디">
+                                        <label for="userId">아이디</label>
+                                        <input type="button" id="btnOverlapped" value="중복확인">
                                         <p class="answer"></p>
                                     </div>
                                 	<br>
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                        <input type="text" class="form-control" name="userName"  id="userName" placeholder="이름">
+                                        <label for="userName">이름</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" name="userPassword"  id="userPassword" placeholder="비밀번호">
+                                        <label for="userPassword">비밀번호</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" name="confirmPasswd" id="confirmPasswd"  placeholder="비밀번호 재입력">
+                                        <label for="confirmPasswd">비밀번호 재입력</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="이메일">
+                                        <label for="userEmail">이메일</label>
+                                        <input type="button" id="btnOverlappedEmail" value="중복확인">
+                                        <p class="answer1"></p>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="zipcode" id="zipcode"  placeholder="우편번호">
+                                        <label for="zipcode">우편번호</label>
+                                        <input type="button" value="검색" onclick="execDaumPostcode();">
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="roadAddress" id="roadAddress"  placeholder="도로명 주소">
+                                        <label for="roadAddress">도로명 주소</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="jibunAddress" id="jibunAddress"  placeholder="지번 주소">
+                                        <label for="jibunAddress">지번 주소</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="namujiAddress" id="namujiAddress"  placeholder="나머지 주소">
+                                        <label for="namujiAddress">나머지 주소</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                    <button class="btn btn-primary w-100 py-3" type="submit">회원가입</button>
                                 </div>
                             </div>
                         </form>

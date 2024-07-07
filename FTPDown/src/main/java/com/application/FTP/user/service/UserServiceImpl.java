@@ -20,4 +20,13 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public String checkDuplicatedEmail(String userEmail) throws Exception {
+		if(userDAO.checkDuplicatedEmail(userEmail) == null) {
+			return "NotDuplicate";
+		}else {
+			return "Deuplicate";
+		}
+	}
+
 }

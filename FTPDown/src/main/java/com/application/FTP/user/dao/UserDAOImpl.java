@@ -15,4 +15,9 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.selectOne("user.checkDuplicated", userId);
 	}
 
+	@Override
+	public String checkDuplicatedEmail(String userEmail) throws Exception {
+		return sqlSession.selectOne("user.checkDuplicatedEmail", userEmail);
+	}
+
 }

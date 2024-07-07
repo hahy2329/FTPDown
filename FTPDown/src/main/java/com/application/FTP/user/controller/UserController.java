@@ -33,4 +33,11 @@ public class UserController {
 		
 		return new ResponseEntity<String>(userService.checkDuplicated(userId), HttpStatus.OK);
 	}
+	
+	@GetMapping("/checkDuplicatedEmail")
+	public ResponseEntity<String> checkDuplicatedEmail(@RequestParam("userEmail") String userEmail) throws Exception{
+		
+		return new ResponseEntity<String>(userService.checkDuplicatedEmail(userEmail), HttpStatus.OK);
+		
+	}
 }
