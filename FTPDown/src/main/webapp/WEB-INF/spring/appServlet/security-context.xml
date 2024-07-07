@@ -10,6 +10,7 @@
 		<intercept-url pattern="/resources/**" access="permitAll"/>
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/user/loginForm.do" access="permitAll"/>
+		<intercept-url pattern="/user/checkDuplicated" access="permitAll"/>
 		
 		
 		
