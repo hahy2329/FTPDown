@@ -40,6 +40,23 @@
 				$(".answer").append("<p style='color:red;'>" + "특수문자는 허용할 수 없습니다." + "</p>");
 				return false;
 			}
+			
+			$.ajax({
+				
+				type : "get",
+				url : "${contextPath}/user/checkDuplicated?userId=" + userId,
+				success : function(data){
+					if(data == "NotDuplicate"){
+						alert("사용할 수 있는 ID입니다.");
+						$(".answer").append("<p style='color:green;'>" + "사용할 수 있는 ID입니다." + "</p>");
+						isValid = true;
+					}else{
+						alert("사용할 수 없는 ID입니다.");
+						$(".answer").append("<p style='color:red;'>" + "사용할 수 없는 ID입니다." + "</p>");
+						isValid = false;
+					}
+				}
+			});
 		});
 		
 	});
