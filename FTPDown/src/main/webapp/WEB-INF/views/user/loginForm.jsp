@@ -6,6 +6,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	
+	var isValid = false;
+	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+	
+	$().ready(function(){
+		$("#userId").keyup(function(){
+			
+			$(".answer").empty();
+			
+			var userId = $("#userId").val();
+			
+			if(userId == ''){
+				alert("ID를 입력해주세요.");
+				$(".answer").append("<p style='color:red;'>" + "ID를 입력해주세요." + "</p>");
+				return;
+			}
+			
+			if(userId.length > 20){
+				alert("ID는 6자리 이상 20자리 이하로 입력해주세요.");
+				$(".answer").append("<p style='color:red;'>" + "ID는 6자리 이상 20자리 이하로 입력해주세요." + "</p>");
+				return;
+			}
+			
+			if(userId.search(/\s/) != -1){
+				alert("공백은 허용할 수 없습니다.");
+				$(".answer").append("<p style='color:red;'>" + "공백은 허용할 수 없습니다." + "</p>");
+				return false;
+			}
+			if(special_pattern.test(userId) == true){
+				alert("특수문자는 허용할 수 없습니다.");
+				$(".answer").append("<p style='color:red;'>" + "특수문자는 허용할 수 없습니다." + "</p>");
+				return false;
+			}
+		});
+		
+	});
+	
+
+</script>
 </head>
 <body>
 	
@@ -24,8 +64,8 @@
                                 <div class="col-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" name="userId" id="userId" placeholder="Your Name">
-                                        <label for="userId">Your ID</label> <input  type="button" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5" id="btnOverlapped" value="중복확인">
-                                    	<p class="answer"></p>
+                                        <label for="userId">Your ID</label>
+                                        <p class="answer"></p>
                                     </div>
                                 	<br>
                                     <div class="form-floating">
